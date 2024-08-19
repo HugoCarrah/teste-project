@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9"><span>Hello</span></div>
+        <div class="col-sm-3">World</div>
+    </div>
+</div>
+<button type="button" class="btn btn-primary">Primary</button>
+<p>usuarios !</p>
+<app-dynamic-table 
+    *ngIf="rows.length > 0"
+    [displayedColumns]="tableColumns"
+    [actions]="actions"
+    [data]="rows"
+    (actionClick)="onActionClick($event)">
+</app-dynamic-table>

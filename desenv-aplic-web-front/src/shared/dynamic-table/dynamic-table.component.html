@@ -1,0 +1,38 @@
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <!-- Colunas Dinâmicas -->
+      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.name">
+        <mat-header-cell class="header-style" *matHeaderCellDef mat-sort-header="{{ column.sortColumn || column.name }}">
+          {{ column.title }}
+          <ng-container *ngIf="column.titleIconAttrs">
+            <!-- <mat-icon [attr.icon]="column.titleIconAttrs?.icon">{{ column.titleIconAttrs?.name }}</mat-icon> -->
+          </ng-container>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element[column.name] }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell class="header-style" *matHeaderCellDef>Ações</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <ng-container *ngFor="let action of actions">
+                <button (click)="onActionClick(action, element)" mat-icon-button class="button-icon {{ action.class }}">
+                    <mat-icon class="mat-icon {{ action.class }}">{{ action.icon }}</mat-icon>
+                </button>
+            </ng-container>
+        </mat-cell>
+      </ng-container>
+      
+      <!-- Cabeçalho e Linhas -->
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columns"></mat-row>
+      
+      
+        <!-- <ng-container *ngIf="header">
+            <tr mat-header-row *matHeaderRowDef="headers"></tr>
+        </ng-container> -->
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
